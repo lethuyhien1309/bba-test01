@@ -1,92 +1,104 @@
 //Bai 1
-//Cach 1
-function createCharacters() {
-    let characters = [
-        { name: 'hien', level: 4, health: 1200 },
-        { name: 'mai', level: 1, health: 100 },
-        { name: 'hoa', level: 5, health: 1500 },
-    ];
-
-    let charactersPowerUp = [];
-    characters.map(character => {
-        charactersPowerUp.push({
-            'name': character.name.toUpperCase(),
-            'level': character.level * 2,
-            'health': character.health * 3
-        });
-    });
-
-    console.log("Sau khi thay doi", charactersPowerUp);
-
-
-    let possibleWinners = characters.filter(character => character.health > 1000);
-    console.log("Sau khi loc", possibleWinners);
-}
-createCharacters();
-//cach 2
-let charactersPowerUp = [];
-let characters = [
+const characters = [
     { name: 'hien', level: 4, health: 1200 },
     { name: 'mai', level: 1, health: 100 },
     { name: 'hoa', level: 5, health: 1500 },
 ];
 
-for (let character of characters) {
-    charactersPowerUp.push({
-        name: character.name.toUpperCase(),
-        level: character.level * 2,
-        health: character.health * 3
-    });
+// Cách 1: map
+function method1() {
+    const result = characters.map(c => ({
+        name: c.name.toUpperCase(),
+        level: c.level * 2,
+        health: c.health * 3
+    }));
+
+    console.log("C1 Sau khi thay đổi:", result);
+
+    const winners = characters.filter(c => c.health > 1000);
+    console.log("C1 Sau khi lọc:", winners);
 }
-createCharacters();
-//Bai 2
 
-//cach so 1
-function printLeaderboard() {
-    let player = [
-        { name: "Mario", score: 1000 },
-        { name: "Luigi", score: 9000 },
-        { name: "Peach", score: 850 },
-        { name: "Yoshi", score: 7000 },
-        { name: "hien", score: 10000 },
+// Cách 2: for...of
+function method2() {
+    const result = [];
 
-    ]
-    player.sort((a, b) => b.score - a.score);
-    console.log('Sau khi sap xep mang:', player);
-    for (i = 0; i <= 2; i++) {
-        let huychuong = "";
-        if (i === 0) {
-            console.log(huychuong = "🥇")
-        }
-        else if (i === 1) {
-            console.log(huychuong = "🥈")
-        }
-        else if (i === 2) {
-            console.log(huychuong = "🥉")
-        };
-        console.log((i + 1) + ". " + player[i].name + " - " + player[i].score + " pts");
+    for (const c of characters) {
+        result.push({
+            name: c.name.toUpperCase(),
+            level: c.level * 2,
+            health: c.health * 3
+        });
     }
 
+    console.log("C2 Sau khi thay đổi:", result);
+
 }
-printLeaderboard();
+
+// Cách 3: forEach
+function method3() {
+    const result = [];
+
+    characters.forEach(c => {
+        result.push({
+            name: c.name.toUpperCase(),
+            level: c.level * 2,
+            health: c.health * 3
+        });
+    });
+    console.log("C3 Sau khi thay đổi:", result);
+
+}
+
+method1();
+method2();
+method3();
+
+
+// Bài 2
+
+const players = [
+    { name: "Mario", score: 1000 },
+    { name: "Luigi", score: 9000 },
+    { name: "Peach", score: 850 },
+    { name: "Yoshi", score: 7000 },
+    { name: "hien", score: 10000 },
+
+]
+// cach so 1
+// function printLeaderboard() {
+
+//     players.sort((a, b) => b.score - a.score);
+//     console.log('Sau khi sap xep mang:', players);
+//     for (let i = 0; i <= 2; i++) {
+//         let huychuong = "";
+//         if (i === 0) {
+//             console.log(huychuong = "🥇")
+//         }
+//         else if (i === 1) {
+//             console.log(huychuong = "🥈")
+//         }
+//         else if (i === 2) {
+//             console.log(huychuong = "🥉")
+//         };
+//         console.log((i + 1) + ". " + players[i].name + " - " + players[i].score + " pts");
+//     }
+
+// }
+// printLeaderboard();
 
 //cach so 2
-function printLeaderboard() {
-    let player = [
-        { name: "Mario", score: 1000 },
-        { name: "Luigi", score: 9000 },
-        { name: "Peach", score: 850 },
-        { name: "Yoshi", score: 7000 },
-        { name: "hien", score: 10000 },
 
-    ]
-    player.sort((a, b) => b.score - a.score);
-    console.log('Sau khi sap xep mang:', player);
-    console.log("🥇 " + player[0].name + " - " + player[0].score + " pts");
-    console.log("🥈 " + player[1].name + " - " + player[1].score + " pts");
-    console.log("🥉 " + player[2].name + " - " + player[2].score + " pts");
+function printLeaderboard(players) {
+    const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+
+    const medals = ['🥇', '🥈', '🥉'];
+
+    sortedPlayers.forEach((player, index) => {
+        const medal = medals[index] || '';
+        console.log(`${medal} ${index + 1}. ${player.name} - ${player.score} pts`);
+    });
 
 }
-printLeaderboard();
-
+printLeaderboard(players);
 
